@@ -1,0 +1,188 @@
+PROPRIETARY SOFTWARE LICENSE
+
+Copyright (c) 2024 Orizon. All rights reserved.
+
+NOTICE: This software and its associated documentation are proprietary and
+confidential to Orizon ("the Company"). This is NOT open source software.
+
+═══════════════════════════════════════════════════════════════════════════
+
+TERMS AND CONDITIONS
+
+1. OWNERSHIP
+   This software, including all code, documentation, and associated materials
+   ("the Software"), is the exclusive property of Orizon. All rights, title,
+   and interest in and to the Software remain with Orizon.
+
+2. LICENSE GRANT
+   Subject to the terms of this agreement, Orizon grants you a limited,
+   non-exclusive, non-transferable, revocable license to:
+
+   - Install and use the Software for authorized penetration testing purposes
+   - Use the Software only with a valid Fireline API key
+   - Use the Software in compliance with all applicable laws and regulations
+
+   This license does NOT grant you the right to:
+   - Access, view, or modify the source code
+   - Reverse engineer, decompile, or disassemble the Software
+   - Redistribute, sublicense, or sell the Software
+   - Remove or alter any proprietary notices or labels
+   - Use the Software for unauthorized purposes
+
+3. API KEY REQUIREMENT
+   Use of this Software requires a valid Fireline API key obtained from
+   https://orizon.one/fireline. Each API key is:
+
+   - Personal and non-transferable
+   - Subject to usage limits and billing
+   - Revocable at any time by Orizon
+   - Tied to your individual or organization account
+
+4. AUTHORIZED USE ONLY
+   This Software is designed EXCLUSIVELY for authorized penetration testing
+   and security research conducted with explicit written permission.
+
+   You MUST:
+   - Obtain explicit written authorization before testing any system
+   - Define clear scope boundaries with the target organization
+   - Comply with all applicable laws (CFAA, GDPR, CCPA, etc.)
+   - Maintain comprehensive activity logs
+   - Follow responsible disclosure practices
+
+   Unauthorized use is STRICTLY PROHIBITED and constitutes a material breach
+   of this license, in addition to being a criminal offense.
+
+5. RESTRICTIONS
+   You may NOT:
+
+   - Use the Software to access systems without explicit authorization
+   - Share your API key with others
+   - Attempt to bypass usage limits or billing mechanisms
+   - Use the Software for malicious purposes
+   - Develop competing products based on the Software's functionality
+   - Benchmark or performance test the Software without written permission
+   - Use the Software in any way that violates applicable laws
+
+6. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+   Orizon does not warrant that:
+   - The Software will meet your requirements
+   - The Software will be uninterrupted or error-free
+   - Any defects will be corrected
+   - The Software is free from vulnerabilities
+
+7. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL ORIZON BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+   OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+   WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+   OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+   You acknowledge and agree that:
+   - You use the Software at your own risk
+   - You are solely responsible for your actions
+   - Orizon is not liable for any misuse of the Software
+   - You will indemnify Orizon against any claims arising from your use
+
+8. TERMINATION
+   This license is effective until terminated. Your rights under this license
+   will terminate automatically without notice if you fail to comply with any
+   of its terms.
+
+   Upon termination, you must:
+   - Immediately cease all use of the Software
+   - Delete all copies of the Software in your possession
+   - Destroy any related documentation
+
+   Orizon may terminate this license at any time by:
+   - Revoking your API key
+   - Providing written notice
+   - Disabling access to the Software
+
+9. COMPLIANCE AND AUDITING
+   Orizon reserves the right to:
+   - Monitor usage of the Software via API key tracking
+   - Audit your compliance with this license
+   - Request information about your usage
+   - Terminate access for non-compliance
+
+10. UPDATES AND MODIFICATIONS
+    Orizon may update the Software at any time without notice. Updates may:
+    - Add, modify, or remove features
+    - Change pricing or usage limits
+    - Modify API behavior
+    - Require acceptance of new terms
+
+    Continued use of the Software after updates constitutes acceptance of
+    any changes.
+
+11. EXPORT COMPLIANCE
+    You acknowledge that the Software may be subject to export control laws.
+    You agree to comply with all applicable export and re-export restrictions
+    and regulations.
+
+12. GOVERNING LAW
+    This license shall be governed by and construed in accordance with the
+    laws of the jurisdiction where Orizon is registered, without regard to
+    its conflict of law provisions.
+
+    Any disputes arising from this license shall be resolved in the courts
+    of that jurisdiction.
+
+13. ENTIRE AGREEMENT
+    This license constitutes the entire agreement between you and Orizon
+    concerning the Software and supersedes all prior agreements and
+    understandings, whether written or oral.
+
+14. SEVERABILITY
+    If any provision of this license is found to be invalid or unenforceable,
+    the remaining provisions shall continue in full force and effect.
+
+═══════════════════════════════════════════════════════════════════════════
+
+CRIMINAL PENALTIES FOR UNAUTHORIZED ACCESS
+
+Unauthorized access to computer systems is a criminal offense under:
+
+• United States: Computer Fraud and Abuse Act (CFAA) - 18 U.S.C. § 1030
+  Penalties: Up to 10 years imprisonment and significant fines
+
+• United Kingdom: Computer Misuse Act 1990
+  Penalties: Up to 10 years imprisonment and unlimited fines
+
+• European Union: Directive 2013/40/EU
+  Penalties: Minimum 2 years, up to 5+ years imprisonment
+
+• Similar legislation exists in virtually all jurisdictions worldwide
+
+═══════════════════════════════════════════════════════════════════════════
+
+ACCEPTANCE
+
+BY INSTALLING, DOWNLOADING, ACCESSING, OR USING THIS SOFTWARE, YOU
+ACKNOWLEDGE THAT YOU HAVE READ THIS LICENSE, UNDERSTAND IT, AND AGREE TO
+BE BOUND BY ITS TERMS AND CONDITIONS.
+
+IF YOU DO NOT AGREE TO THESE TERMS, DO NOT INSTALL, DOWNLOAD, ACCESS, OR
+USE THE SOFTWARE.
+
+═══════════════════════════════════════════════════════════════════════════
+
+CONTACT INFORMATION
+
+For licensing inquiries:        licensing@orizon.one
+For technical support:          support@orizon.one
+For security issues:            security@orizon.one
+
+Website:                        https://orizon.one/fireline
+API Key Registration:           https://orizon.one/fireline
+
+═══════════════════════════════════════════════════════════════════════════
+
+Orizon
+Last Updated: December 2024

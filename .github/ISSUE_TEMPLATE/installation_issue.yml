@@ -1,0 +1,112 @@
+name: 📦 Installation Issue
+description: Report a problem with installation or setup
+title: "[Installation]: "
+labels: ["installation", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Having trouble installing Fireline? Let us help!
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you trying to install on?
+      options:
+        - Linux
+        - macOS (Intel)
+        - macOS (Apple Silicon)
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: OS Version
+      description: What version of the OS?
+      placeholder: e.g., Ubuntu 22.04, macOS 14.0, Windows 11
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installation-method
+    attributes:
+      label: Installation Method
+      description: How are you trying to install?
+      options:
+        - Install script (curl/wget)
+        - Manual download
+        - From source
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Installation Command
+      description: What command did you run?
+      placeholder: e.g., curl -sSL https://github.com/Orizon-eu/fireline/releases/latest/download/install.sh | bash
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Error Message
+      description: What error did you encounter?
+      placeholder: Paste the full error message here
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps Taken
+      description: What steps have you already tried?
+      placeholder: |
+        1. Downloaded installer script
+        2. Ran installation command
+        3. Got error...
+
+  - type: dropdown
+    id: container-runtime
+    attributes:
+      label: Container Runtime
+      description: Do you have Docker or Podman installed?
+      options:
+        - Yes - Docker
+        - Yes - Podman
+        - No
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: docker-version
+    attributes:
+      label: Docker/Podman Version
+      description: If applicable, what version? (run `docker --version` or `podman --version`)
+      placeholder: e.g., Docker version 24.0.7
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Any other relevant information
+      placeholder: System specs, network setup, etc.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-installation Checklist
+      description: Have you completed these steps?
+      options:
+        - label: I have Docker or Podman installed
+        - label: I have a Fireline API key from orizon.one/fireline
+        - label: I have checked the installation requirements
