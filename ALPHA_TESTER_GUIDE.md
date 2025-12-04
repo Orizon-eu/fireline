@@ -1,279 +1,283 @@
 # 🧪 Fireline Alpha Tester Guide
 
-Welcome to the Fireline alpha program! This guide will help you get started.
+Welcome to the Fireline alpha program! This guide will help you get started with the AI-powered penetration testing assistant.
 
 ---
 
-## 🎯 What is Alpha Testing?
+## 🎯 What is Fireline?
 
-You're among the first to test Fireline's AI-powered penetration testing capabilities. Your feedback will shape the final product.
+Fireline is an AI-powered CLI where you **describe what you want to test** in natural language, and the AI **autonomously executes security tools** in isolated Kali Linux containers.
 
-**As an alpha tester, you'll:**
-- Test cutting-edge AI pentesting features
-- Report bugs and suggest improvements
-- Help refine the user experience
-- Get free API usage during alpha
-- Be recognized as an alpha contributor
+**Key Differences from Traditional Tools:**
+- ❌ No commands to memorize
+- ❌ No manual tool chaining  
+- ✅ Natural conversation with AI
+- ✅ Autonomous tool selection and execution
+- ✅ Real-time task monitoring in TUI
 
 ---
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have:
+Before you begin:
 
 - [ ] **GitHub Account** with collaborator access to `Orizon-eu/fireline`
-- [ ] **GitHub CLI** (`gh`) installed and authenticated
-- [ ] **Docker** or **Podman** installed
-- [ ] **Fireline API Key** (provided in your invitation email)
-- [ ] **System Requirements**: 4GB+ RAM, 10GB disk space
+- [ ] **Docker** or **Podman** installed and running
+- [ ] **Fireline API Key** (provided in invitation email)
+- [ ] **System**: 4GB+ RAM, 10GB disk space
 
 ---
 
-## 🚀 Installation Steps
+## 🚀 Installation
 
 ### Step 1: Verify GitHub Access
 
-Check that you have access to the private repository:
-
 ```bash
-gh auth login  # If not already authenticated
+gh auth login  # If not authenticated
 gh repo view Orizon-eu/fireline
 ```
 
-**Expected output**: Repository details
+**Expected**: Repository details  
 **If error**: Contact info@orizon.one
 
-### Step 2: Install GitHub CLI (if needed)
+### Step 2: Install Fireline
 
-#### macOS
-```bash
-brew install gh
-```
-
-#### Linux (Debian/Ubuntu)
-```bash
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
-  sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | \
-  sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-
-sudo apt update && sudo apt install gh
-```
-
-#### Windows
-```powershell
-# PowerShell
-winget install --id GitHub.cli
-
-# Or download from: https://cli.github.com/
-```
-
-### Step 3: Download Fireline
-
-#### Option A: Quick Install (Linux/macOS)
+#### Linux / macOS (Quick Install)
 
 ```bash
-# Download and run the alpha install script
-gh release download --repo Orizon-eu/fireline --pattern 'alpha-install.sh'
-chmod +x alpha-install.sh
-./alpha-install.sh
+curl -sSL https://raw.githubusercontent.com/Orizon-eu/fireline/main/alpha-install.sh | bash
 ```
 
-#### Option B: Manual Download
+#### Manual Installation
 
 ```bash
-# List available releases
+# List releases
 gh release list --repo Orizon-eu/fireline
 
 # Download for your platform
-# Linux x86_64
-gh release download v0.1.0-alpha --repo Orizon-eu/fireline --pattern '*linux-x86_64.tar.gz*'
-
-# macOS Intel
-gh release download v0.1.0-alpha --repo Orizon-eu/fireline --pattern '*darwin-x86_64.tar.gz*'
-
-# macOS Apple Silicon
 gh release download v0.1.0-alpha --repo Orizon-eu/fireline --pattern '*darwin-aarch64.tar.gz*'
 
 # Extract and install
-tar -xzf fireline-*-*.tar.gz
+tar -xzf fireline-*.tar.gz
 sudo mv fireline /usr/local/bin/
 chmod +x /usr/local/bin/fireline
 ```
 
-#### Option C: Windows
-
-```powershell
-# Download installer
-gh release download --repo Orizon-eu/fireline --pattern 'install.ps1'
-.\install.ps1
-```
-
-### Step 4: Verify Installation
+### Step 3: Verify Installation
 
 ```bash
 fireline --version
 ```
 
-**Expected**: Version number (e.g., `Fireline v0.1.0-alpha`)
-
 ---
 
-## 🔑 Configuration
+## 🔑 First Run Setup
 
-### Setup Your API Key
-
-Your Fireline API key was provided in your invitation email.
-
-#### Automatic Setup (First Run)
+### Launch Fireline
 
 ```bash
 fireline
-# You'll be prompted to enter your API key
 ```
 
-#### Manual Setup
+### What Happens on First Run:
+
+1. **Legal Disclaimer**: Read and accept terms (required)
+2. **API Key Setup**: Choose from menu:
+   - **[1] I have a Fireline API key** - Enter your key
+   - **[2] Request a Fireline API key** - Opens registration
+   - **[3] Exit** - Exit setup
+3. **Workspace Initialization**: Creates `.fireline/` directory
+
+### API Key Configuration
+
+Your API key is stored securely in `~/.fireline/.env`:
 
 ```bash
-# Create config directory
-mkdir -p ~/.fireline
-
-# Create config file
-cat > ~/.fireline/.env << 'EOF'
 FIRELINE_API_KEY=fl_alpha_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-FIRELINE_MODEL=fireline-assault
-FIRELINE_ENDPOINT=https://api.orizon.one/v1
-EOF
-
-# Secure the config file
-chmod 600 ~/.fireline/.env
 ```
 
-### Verify Configuration
-
+To update later:
 ```bash
-fireline --check-config
+nano ~/.fireline/.env
 ```
 
 ---
 
-## 🎮 Getting Started
+## 💬 Using Fireline
 
-### Your First Engagement
+### The Interface
 
-```bash
-# Start Fireline
-fireline
+Fireline uses a **split-pane TUI**:
+- **Left**: Chat with AI
+- **Right**: Task execution monitoring
 
-# Create a new engagement
-> new engagement "Test Lab - Alpha Testing"
+### How to Interact
 
-# Example reconnaissance
-> scan host 192.168.1.100
+Just **describe what you want to test** in natural language:
 
-# Get AI assistance
-> analyze findings
-
-# Exit
-> exit
+```
+> I need to scan 192.168.1.100 for open ports and identify services
 ```
 
-### Interactive Commands
+The AI will:
+1. Understand your objective
+2. Select appropriate tools (e.g., Nmap)
+3. Execute in Kali container
+4. Show results
+5. Suggest next steps
 
-Fireline uses natural language commands. Examples:
+### Example Conversations
 
-```bash
-# Reconnaissance
-> scan network 192.168.1.0/24
-> enumerate subdomains example.com
-> check dns example.com
+#### Reconnaissance
 
-# Scanning
-> run nmap on 192.168.1.100
-> scan for vulnerabilities
-> check for open ports
-
-# Analysis
-> what are the critical findings?
-> suggest next steps
-> prioritize vulnerabilities
-
-# Exploitation (with authorization!)
-> test sql injection on http://lab.example.com/login
-> attempt privilege escalation
-
-# Reporting
-> generate report
-> export findings
-> show statistics
 ```
+You: I have authorization to test network 10.0.0.0/24. 
+     Start with host discovery and service enumeration.
+
+Fireline: I'll perform reconnaissance on 10.0.0.0/24:
+          1. Host discovery (ping sweep)
+          2. Port scanning on live hosts
+          3. Service version detection
+          
+          [Task 1] Host discovery... ✓ (15 hosts found)
+          [Task 2] Port scanning... ⟳
+```
+
+#### Web Application Testing
+
+```
+You: Test https://lab.example.com for common web vulnerabilities.
+     I have written authorization.
+
+Fireline: I'll test https://lab.example.com for vulnerabilities:
+          1. Technology fingerprinting
+          2. Directory enumeration
+          3. Nuclei vulnerability scan
+          4. SQL injection testing
+          
+          [Task 1] Running whatweb... ✓
+          [Task 2] Gobuster directory scan... ⟳
+```
+
+#### Exploitation
+
+```
+You: The previous scan found an SQLi in the login form.
+     Can you exploit it to extract database names?
+
+Fireline: I'll use SQLMap to exploit the SQL injection:
+          [Task 5] Running SQLMap with --dbs flag... ⟳
+```
+
+### AI Capabilities
+
+The AI can:
+- ✅ Select appropriate tools automatically
+- ✅ Chain multiple tools together
+- ✅ Analyze results and suggest next steps
+- ✅ Remember context from earlier conversation
+- ✅ Execute custom Bash commands
+- ✅ Handle errors and retry with different approaches
 
 ---
 
-## 📊 What to Test
+## 🎮 Advanced Usage
 
-As an alpha tester, please focus on:
+### Command Line Options
+
+```bash
+# Verbose logging
+fireline --verbose
+
+# Skip Docker check (use local tools)
+fireline --skip-docker-check
+
+# Load specific engagement
+fireline --engagement "Client XYZ Pentest"
+
+# Simple REPL mode (no TUI)
+fireline --no-tui
+
+# Non-interactive with prompt
+fireline --prompt "scan 192.168.1.1" --non-interactive
+```
+
+### Engagement Management
+
+Fireline automatically tracks your testing sessions. To reference past work:
+
+```
+> Load my last engagement with example.com
+> Show findings from yesterday's scan
+> Export results from the API pentest engagement
+```
+
+### Background Tasks
+
+Tasks run in the background. You can:
+- Continue chatting while tools execute
+- Monitor progress in the right pane
+- Reference task results later
+
+---
+
+## 📊 What to Test (Alpha Focus)
 
 ### Critical Features
-- [ ] AI reasoning and decision-making
-- [ ] Tool integration (Nmap, Nuclei, etc.)
-- [ ] Natural language command parsing
-- [ ] Finding analysis and prioritization
-- [ ] Report generation
+
+- [ ] Natural language understanding
+- [ ] Tool selection accuracy
+- [ ] Container isolation
+- [ ] Task monitoring
+- [ ] Result analysis quality
+- [ ] Engagement persistence
 
 ### User Experience
-- [ ] Installation process
-- [ ] First-run experience
-- [ ] Command clarity and responsiveness
-- [ ] Error messages and help
-- [ ] Documentation clarity
 
-### Edge Cases
-- [ ] Invalid inputs
-- [ ] Network timeouts
-- [ ] Large scan results
-- [ ] Concurrent operations
-- [ ] Resource limits
+- [ ] First-run setup flow
+- [ ] API key configuration
+- [ ] TUI responsiveness
+- [ ] Error handling
+- [ ] Legal disclaimer clarity
+
+### Tool Integration
+
+- [ ] Nmap scanning
+- [ ] Nuclei vulnerability detection
+- [ ] SQLMap exploitation
+- [ ] Gobuster directory enumeration
+- [ ] Custom Bash commands
 
 ---
 
 ## 🐛 Reporting Issues
 
-Your feedback is invaluable! Please report:
-
 ### What to Report
-- ✅ Bugs and errors
-- ✅ Confusing behavior
-- ✅ Feature requests
-- ✅ Documentation gaps
-- ✅ Performance issues
+
+- ✅ AI misunderstanding requests
+- ✅ Tool execution failures
+- ✅ TUI rendering issues
+- ✅ Container problems
+- ✅ Unexpected behavior
 
 ### How to Report
 
-1. **Check Existing Issues**: https://github.com/Orizon-eu/fireline/issues
-
-2. **Create New Issue**: Use our templates
-   - Bug Report
-   - Feature Request
-   - Tool Integration Request
-
-3. **Include Details**:
+1. **GitHub Issues**: https://github.com/Orizon-eu/fireline/issues
+2. **Include**:
    ```bash
    # System info
    fireline --version
    uname -a
    docker --version
-
-   # Relevant logs
+   
+   # Logs
    cat ~/.fireline/logs/fireline.log
    ```
+3. **Describe**: What you asked, what happened, what you expected
 
-4. **Add Labels**: `alpha`, `bug`, `enhancement`, etc.
+### Priority Support
 
-### Priority Response
-
-Alpha testers get **priority support within 24 hours** for critical issues.
+Alpha testers get **responses within 24 hours** for critical issues.
 
 ---
 
@@ -283,132 +287,144 @@ Alpha testers get **priority support within 24 hours** for critical issues.
 
 **⚠️ ALWAYS test in isolated lab environments**
 
-- Use virtual machines or containers
-- Never test on production systems
-- Maintain clear documentation of test targets
-- Have written authorization for all testing
+- Use virtual machines or containers as targets
+- Never test production systems
+- Maintain written authorization documents
+- Keep detailed test logs
 
-### Responsible Testing
+### Effective Prompts
 
-Even in alpha, follow security best practices:
-- Obtain explicit authorization
-- Define clear scope
-- Document all actions
+**Good prompts are specific:**
+
+✅ "Scan 192.168.1.100 for web services and test for SQL injection"  
+❌ "Check this server"
+
+✅ "Enumerate subdomains for example.com using passive methods"  
+❌ "Find stuff about example.com"
+
+### Authorization
+
+Before every engagement:
+- Obtain explicit written authorization
+- Define scope boundaries clearly
+- Document all activities
 - Report findings responsibly
-- Respect rate limits
-
-### Feedback Guidelines
-
-When providing feedback:
-- Be specific and detailed
-- Include steps to reproduce
-- Suggest improvements
-- Compare with other tools (if relevant)
-- Focus on user experience
 
 ---
 
-## 📞 Support Channels
+## 🔧 Troubleshooting
 
-### Primary Support
+### Docker Not Available
+
+```
+Error: Docker is not running
+```
+
+**Fix**: Start Docker/Podman
+```bash
+# Linux
+sudo systemctl start docker
+
+# macOS
+open -a Docker
+
+# Then rerun
+fireline
+```
+
+### API Key Issues
+
+```
+Error: Invalid API key
+```
+
+**Fix**: Update your key
+```bash
+nano ~/.fireline/.env
+# Update FIRELINE_API_KEY=your_key_here
+```
+
+### Container Errors
+
+```
+Error: Failed to create container session
+```
+
+**Fix**: Pull the image manually
+```bash
+docker pull eagleb/fireline:latest
+fireline
+```
+
+---
+
+## 📞 Support
+
+### Primary Contact
 - **Email**: info@orizon.one
 - **Response Time**: Within 24 hours
-- **For**: Bugs, installation issues, API key problems
+- **For**: Bugs, installation help, API keys
 
 ### GitHub Issues
 - **URL**: https://github.com/Orizon-eu/fireline/issues
-- **For**: Bug reports, feature requests, public discussions
-
-### Emergency Contact
-- **Critical bugs**: info@orizon.one
-- **Examples**: Data loss, security vulnerabilities, system crashes
+- **For**: Bug reports, feature requests
 
 ---
 
-## 🎁 Alpha Tester Benefits
+## 🎁 Alpha Benefits
 
 ### During Alpha
-- ✅ Free API usage (no billing)
+- ✅ Free API usage
 - ✅ Priority support
-- ✅ Direct influence on features
-- ✅ Early access to new capabilities
-- ✅ Alpha tester badge (coming soon)
+- ✅ Direct feature influence
+- ✅ Early access to updates
 
 ### After Alpha
-- ✅ Discounted pricing (50% off first 3 months)
+- ✅ 50% off first 3 months
 - ✅ Recognition in release notes
-- ✅ Special contributor badge
 - ✅ Lifetime "Founding Tester" status
-
----
-
-## 📅 Alpha Timeline
-
-- **Current Phase**: Alpha 1 (Core Features)
-- **Duration**: 6-8 weeks
-- **Next Phase**: Alpha 2 (Advanced Features)
-- **Beta Target**: Q1 2025
-
-### What's Coming
-- Enhanced AI models
-- More tool integrations
-- Team collaboration features
-- Advanced reporting
-- API for custom integrations
 
 ---
 
 ## 🔄 Updating Fireline
 
-We'll release updates frequently during alpha.
-
-### Check for Updates
+Check for updates:
 
 ```bash
-# Check latest version
-gh release list --repo Orizon-eu/fireline --limit 1
+# List releases
+gh release list --repo Orizon-eu/fireline --limit 5
 
-# Download and install latest
-gh release download --repo Orizon-eu/fireline --pattern 'alpha-install.sh'
-chmod +x alpha-install.sh
-./alpha-install.sh
+# Download latest
+curl -sSL https://raw.githubusercontent.com/Orizon-eu/fireline/main/alpha-install.sh | bash
 ```
-
-### Release Notes
-
-Check release notes for each version:
-- https://github.com/Orizon-eu/fireline/releases
 
 ---
 
 ## ❓ FAQ
 
-**Q: Can I share Fireline with colleagues?**
-A: No, access is individual. They should request alpha access at info@orizon.one
+**Q: How does Fireline choose which tools to use?**  
+A: The AI analyzes your request and selects tools based on the objective, target type, and context from the conversation.
 
-**Q: Is my data safe?**
-A: Yes. Engagement data is encrypted at rest and in transit. See our [Privacy Policy](https://orizon.one/privacy).
+**Q: Can I use custom tools?**  
+A: Yes! Just ask the AI to run custom Bash commands. They execute in the Kali container with all standard tools available.
 
-**Q: Can I use Fireline commercially?**
-A: During alpha, only for testing. Commercial use requires a separate license (coming in beta).
+**Q: Is data encrypted?**  
+A: Yes. All API communication uses TLS 1.3. Local data is stored in SQLite database on your machine.
 
-**Q: What if I find a security vulnerability?**
+**Q: Can I share Fireline?**  
+A: No, access is per-person. Colleagues should request access at info@orizon.one
+
+**Q: What if I find a security vulnerability?**  
 A: Report immediately to info@orizon.one. Do not disclose publicly.
 
-**Q: Can I record demos or write about Fireline?**
-A: Yes, but mark content as "Alpha" and include disclaimers. No NDA required.
-
-**Q: Will my alpha feedback be implemented?**
-A: We review all feedback. Priority features voted by alpha testers will be fast-tracked.
-
-**Q: How do I leave the alpha program?**
-A: Email info@orizon.one. Your access will be revoked and data deleted.
+**Q: Can I use Fireline commercially?**  
+A: During alpha, only for testing. Commercial licensing available in beta.
 
 ---
 
 ## 🙏 Thank You!
 
-Your participation in the Fireline alpha is invaluable. Your feedback will help us build the best AI-powered pentesting tool.
+Your feedback shapes Fireline's development. Thank you for being an alpha tester!
 
 **Questions?** info@orizon.one
 
