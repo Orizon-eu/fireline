@@ -186,7 +186,7 @@ The AI handles the rest autonomously.
 
 - **Alpha Tester Guide**: [ALPHA_TESTER_GUIDE.md](ALPHA_TESTER_GUIDE.md)
 - **Security Policy**: [SECURITY.md](SECURITY.md)
-- **Website**: [orizon.one/fireline](https://orizon.one/fireline)
+- **Website**: [fireline.orizon.one](https://fireline.orizon.one)
 - **Support**: info@orizon.one
 - **Issues**: [GitHub Issues](https://github.com/Orizon-eu/fireline/issues)
 

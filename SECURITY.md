@@ -112,7 +112,7 @@ Fireline is a penetration testing tool that:
 
 Subscribe to security updates:
 - **GitHub Watch**: Watch this repository for security advisories
-- **Email**: Subscribe at https://orizon.one/fireline/security
+- **Email**: Subscribe at https://fireline.orizon.one/security
 - **RSS**: Follow our security blog at https://orizon.one/blog/security
 
 ## Compliance
@@ -147,7 +147,7 @@ By using Fireline, you acknowledge:
 
 - **Security Issues**: info@orizon.one
 - **General Support**: info@orizon.one
-- **Website**: https://orizon.one/fireline
+- **Website**: https://fireline.orizon.one
 
 ---
 

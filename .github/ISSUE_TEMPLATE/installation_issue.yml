@@ -108,5 +108,5 @@ body:
       description: Have you completed these steps?
       options:
         - label: I have Docker or Podman installed
-        - label: I have a Fireline API key from orizon.one/fireline
+        - label: I have a Fireline API key from fireline.orizon.one
         - label: I have checked the installation requirements

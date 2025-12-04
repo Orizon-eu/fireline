@@ -1,14 +1,14 @@
 blank_issues_enabled: false
 contact_links:
   - name: 📚 Documentation
-    url: https://docs.orizon.one/fireline
+    url: https://docs.fireline.orizon.one
     about: Read the official documentation
   - name: 💬 Get Support
     url: mailto:support@orizon.one
     about: Contact our support team directly
   - name: 🌐 Website
-    url: https://orizon.one/fireline
+    url: https://fireline.orizon.one
     about: Visit the Fireline website
   - name: 🔑 Get API Key
-    url: https://orizon.one/fireline
+    url: https://fireline.orizon.one
     about: Obtain your Fireline API key
