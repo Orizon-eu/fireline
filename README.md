@@ -63,6 +63,11 @@ sudo mv fireline /usr/local/bin/
 chmod +x /usr/local/bin/fireline
 ```
 
+**macOS only:** If you get a "killed" error, remove the quarantine attribute:
+```bash
+sudo xattr -d com.apple.quarantine /usr/local/bin/fireline
+```
+
 **Windows:**
 ```powershell
 Expand-Archive fireline-*.zip
