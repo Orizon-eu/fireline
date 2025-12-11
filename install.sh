@@ -1,3 +1,10 @@
+#!/usr/bin/env bash
+# Fireline Installation Script
+# Copyright (c) 2024 Orizon - https://orizon.one
+#
+# Usage:
+#   curl -sSL https://orizon.one/fireline/install.sh | bash
+#   wget -qO- https://orizon.one/fireline/install.sh | bash
 
 set -e
 
@@ -24,11 +31,12 @@ print_banner() {
  | |_  | | '__/ _ \ | | '_ \ / _ \
  |  _| | | | |  __/ | | | | |  __/
  |_|   |_|_|  \___|_|_|_| |_|\___|
-
+     🧪 ALPHA VERSION 🧪
 EOF
     echo -e "${NC}"
     echo -e "${BLUE}AI-Powered Penetration Testing CLI${NC}"
     echo -e "${BLUE}Developed by Orizon | https://orizon.one${NC}"
+    echo -e "${YELLOW}⚠️  ALPHA SOFTWARE - FOR AUTHORIZED TESTERS ONLY${NC}"
     echo ""
 }
 
@@ -119,38 +127,34 @@ install_fireline() {
     local platform=$(detect_platform)
     success "Detected platform: $platform"
 
-    # Determine version to install
-    local tag="latest"
-    if [ "$VERSION" != "latest" ]; then
-        tag="v${VERSION}"
+    # Fetch version FIRST, before building any URLs
+    if [ "$VERSION" = "latest" ]; then
+        info "Fetching latest alpha version..."
+        if command_exists curl; then
+            local latest_version=$(curl -sL "https://api.github.com/repos/${GITHUB_REPO}/releases/latest" | grep '"tag_name"' | cut -d'"' -f4 | sed 's/^v//')
+            if [ -n "$latest_version" ]; then
+                VERSION="$latest_version"
+                success "Latest version: $VERSION"
+            else
+                VERSION="0.1.0"
+                warn "Unable to fetch latest version, using default $VERSION"
+            fi
+        else
+            VERSION="0.1.0"
+            warn "curl not available, using default version $VERSION"
+        fi
     fi
 
-    # Construct download URLs from GitHub Releases
+    # Now build URLs with the resolved VERSION
     local binary_name="fireline"
+    local ext="tar.gz"
+    
     if [[ "$platform" == windows-* ]]; then
         binary_name="fireline.exe"
-        local ext="zip"
-    else
-        local ext="tar.gz"
+        ext="zip"
     fi
 
     local archive_name="fireline-${VERSION}-${platform}.${ext}"
-
-    # Use GitHub Releases API to get actual version if latest
-    if [ "$VERSION" = "latest" ]; then
-        info "Fetching latest release..."
-        if command_exists curl; then
-            VERSION=$(curl -sL "https://api.github.com/repos/${GITHUB_REPO}/releases/latest" | grep '"tag_name"' | cut -d'"' -f4 | sed 's/^v//')
-        fi
-        if [ -z "$VERSION" ]; then
-            VERSION="0.1.0"
-            warn "Unable to fetch latest version, using $VERSION"
-        else
-            success "Latest version: $VERSION"
-        fi
-        archive_name="fireline-${VERSION}-${platform}.${ext}"
-    fi
-
     local download_url="https://github.com/${GITHUB_REPO}/releases/download/v${VERSION}/${archive_name}"
     local checksum_url="https://github.com/${GITHUB_REPO}/releases/download/v${VERSION}/${archive_name}.sha256"
 
@@ -161,8 +165,9 @@ install_fireline() {
     trap "rm -rf $tmp_dir" EXIT
 
     # Download archive
-    download "$download_url" "$tmp_dir/$archive_name" || \
-        error "Failed to download Fireline. Please check your internet connection or visit https://orizon.one/fireline for manual installation."
+    if ! download "$download_url" "$tmp_dir/$archive_name"; then
+        error "Failed to download Fireline.\nThis could mean:\n1. The release assets are not published yet\n2. Your platform is not supported\n3. Network connection issues\n\nPlatform requested: $platform\nRelease version: v${VERSION}\n\nContact: info@orizon.one"
+    fi
 
     # Download and verify checksum (optional but recommended)
     if download "$checksum_url" "$tmp_dir/$archive_name.sha256" 2>/dev/null; then
@@ -176,7 +181,11 @@ install_fireline() {
 
     # Extract archive
     info "Extracting archive..."
-    tar -xzf "$tmp_dir/$archive_name" -C "$tmp_dir"
+    if [[ "$ext" == "zip" ]]; then
+        unzip -q "$tmp_dir/$archive_name" -d "$tmp_dir"
+    else
+        tar -xzf "$tmp_dir/$archive_name" -C "$tmp_dir"
+    fi
 
     # Create directories
     mkdir -p "$BIN_DIR"
