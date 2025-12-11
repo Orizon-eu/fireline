@@ -1,10 +1,3 @@
-#!/usr/bin/env bash
-# Fireline Installation Script
-# Copyright (c) 2024 Orizon - https://orizon.one
-#
-# Usage:
-#   curl -sSL https://orizon.one/fireline/install.sh | bash
-#   wget -qO- https://orizon.one/fireline/install.sh | bash
 
 set -e
 
